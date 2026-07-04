@@ -37,9 +37,9 @@ dev_tools = false
 
   [relationship.value_change_amount]
     # amount a relationship changes for "high", "medium", and "low" effects for interactions
-    low = 8
+    low = 6
     medium = 12
-    high = 16
+    high = 18
 
   [relationship.pair_events]
     # weights for each type of intensity
@@ -90,16 +90,16 @@ dev_tools = false
   override_same_age_group = false
 
   # 1/chance of becoming mates when the conditions are fulfilled
-  chance_fulfilled_condition = 5
+  chance_fulfilled_condition = 2
 
   # 1/chance of becoming mates, triggers with friends_to_lover (has to be a high number because many relationships are checked each moon)
   chance_friends_to_lovers = 170
 
   # base 1/chance for mates to break up. Affected by relationship values and personality compatibility. 0 disables breakups entirely
-  base_breakup_chance = 30
+  base_breakup_chance = 60
 
   # chance to move on from a dead or absent mate, fraction represents a percentage. default is 30% chance.
-  chance_to_move_on = 0.3
+  chance_to_move_on = 0.2
 
 
   # NOTE FOR RELATIONSHIP CONSTRAINTS
@@ -196,7 +196,7 @@ dev_tools = false
 
 [new_cat]
   # number of welcoming events to add when a new cat joins
-  cat_amount_welcoming = 3
+  cat_amount_welcoming = 6
 
   # ext_relative_modifer * parents(len) is what will a relative's relation toward the parent 
   # will be divided by when deciding on a relative's initial relationship toward a kit
@@ -275,10 +275,10 @@ dev_tools = false
 
   # 1/chance for an unmated cat to have an affair (coparenting)
   # for this check, only other unmated cats can be the affair partner
-  unmated_random_affair_chance = 10
+  unmated_random_affair_chance = 25
 
   # proportion of situations where surrogacy will be selected when applicable (0 - never, 1 - always)
-  surrogate_rate = 1
+  surrogate_rate = 0.5
 
   # 1/chance for cats to select a clanmate as a surrogate when possible
   clanmate_surrogate_chance = 5
@@ -293,10 +293,10 @@ dev_tools = false
   half-clan_chance = 0.25
 
   # 1/chance that a phantom pregnancy will happen when cats fail to have a litter
-  false_pregnancy_chance = 500
+  false_pregnancy_chance = 200
 
   # 1/chance that a pregnancy will be hidden from the player until a cat gives birth
-  hidden_pregnancy_chance = 200
+  hidden_pregnancy_chance = 20
 
   # The kit number is incremental. It is 1-6 as default so if you change these numbers, you should probably keep this in mind.
   # As in, your max kits number should probably be 5 more than the min kits number.
@@ -395,10 +395,10 @@ dev_tools = false
 
 [cat_generation]
   # base 1/chance that a cat will generate with a permanent condition. gets modified further in code
-  base_permanent_condition = 90
+  base_permanent_condition = 40
 
   # kittypets will have a higher chance of having many rarer genes, even if not purebred
-  kittypet_gene_boost = false
+  kittypet_gene_boost = true
 
 [cat_name_controls]
   # if changing prefixes is enabled, 1/chance for a cat to change their prefix when coming out as trans
@@ -438,29 +438,29 @@ dev_tools = false
 
 [accessory_generation]
   # base 1/chance a cat generates with an accessory 
-  base_acc_chance = 150
+  base_acc_chance = 100
 
   # modifiers for accessories add or subtract from chance IN THE DENOMINATOR 
   #   i.e. 1/(chance + med_modifier + baby_modifier + elder_modifier + ...)
   # so SUBTRACTING will INCREASE the chance an accessory is given
 
   # modifies accessory chance based on if cat is a medicine cat
-  med_modifier = -80
+  med_modifier = -20
 
   # modifies accessory chance based on if cat is a kitten or adolescent
   baby_modifier = -20
 
   # modifies accessory chance based on if cat is a senior or senior adult
-  elder_modifier = 20
+  elder_modifier = 0
 
   # modifies accessory chance based on if cat has "happy" traits
-  happy_trait_modifier = -30
+  happy_trait_modifier = -20
 
   # modifies accessory chance based on if cat has "grumpy" traits
-  grumpy_trait_modifier = 30
+  grumpy_trait_modifier = 0
 
   # modifies accessory chance based on if cat had a ceremony
-  ceremony_modifier = -20
+  ceremony_modifier = -70
 
   # modifies accessory chance based on if cat already has at least one other accessory
   multiple_acc_modifier = 50
@@ -481,7 +481,7 @@ dev_tools = false
 
 [fading]
   # age that a cat will complete fading
-  age_to_fade = 202
+  age_to_fade = 240
 
   # kits fade faster if modded kits is on
   kit_fade = 24
@@ -500,7 +500,7 @@ dev_tools = false
   queen_app_chance = 75
 
   # base 1/chance that a cat will be chosen as a med cat apprentice
-  base_medicine_app_chance = 41
+  base_medicine_app_chance = 40
 
   [roles.become_mediator_chances]
     # 1/chance that a cat will switch to mediator. rolls every moon, so keep it high.
@@ -526,33 +526,33 @@ dev_tools = false
     threshold_percentage_seniors = 30
 
     # how many moons is considered "very old"
-    threshold_moons_ancient = 150
+    threshold_moons_ancient = 168
 
     # minimum percentage of medcat population that are ancient for buff to app chance
     threshold_percentage_ancient = 30
 
 [retirement]
   # max 1/chance for old leaders to retire if enabled
-  max_leader_retire_chance = 50
+  max_leader_retire_chance = 10
 
   # max 1/chance for old healers to retire if enabled
-  max_healer_retire_chance = 10
+  max_healer_retire_chance = 5
 
   # max 1/chance for old mediators to retire if enabled
-  max_mediator_retire_chance = 25
+  max_mediator_retire_chance = 2
 
   # max 1/chance for old permaqueens to retire
-  max_queen_retire_chance = 25
+  max_queen_retire_chance = 5
 
   # cats may retire once they reach the min age, and will automatically retire if over 25 moons above it
-  min_retirement_age = 115
+  min_retirement_age = 119
 
 [lost_cat]
   # 1/chance that a lost cat will return on their own
   rejoin_chance = 20
 
   # 1/chance for a cat to rejoin the Clan if recently tnred. Only rolled once
-  rejoin_tnr_chance = 2
+  rejoin_tnr_chance = 3
 
 [cat_ages]
   # represents ranges for cat ages
@@ -640,13 +640,13 @@ dev_tools = false
 
   # base 1/2^(chance) a completely random murder occurs
   # aggression and instability will make the denominator lower and increase chance of murder
-  base_random_murder_chance = 11
+  base_random_murder_chance = 10
 
   # base 1/chance a disliked cat will be murdered
-  base_murder_kill_chance = 80
+  base_murder_kill_chance = 65
 
   # base 1/chance a disliked cat will be murdered when not in the same Clan
-  base_crossclan_murder_kill_chance = 130
+  base_crossclan_murder_kill_chance = 100
 
   # age cats will start dying of old age based on old_age_death_curve
   old_age_death_start = 150
@@ -663,8 +663,8 @@ dev_tools = false
 
   # 0-1 chance for a kit of a certain age to die on moonskip if modded litters is on 
   [death_related.kit_death_chances]
-    "0" = 0.33
-    "1" = 0.15
+    "0" = 0.25
+    "1" = 0.1
     "2" = 0.1
     "3" = 0.1
     "4" = 0.05
@@ -693,10 +693,10 @@ dev_tools = false
 
 [clan_creation]
   # Set this to -1 for it to be infinite
-  rerolls = 3
+  rerolls = -1
 
   # If true, boosts the chance of rarer genes and breeds for founding cats
-  use_special_roller = true
+  use_special_roller = false
 
   # some amount of warriors is always guaranteed, but remaining cats in the cat select screen will choose ranks based on this list
   # adding ranks not normally found here may lead to unpredictable results
@@ -704,43 +704,43 @@ dev_tools = false
 
   # how many neighbouring clans are generated on clan creation. Must be at least 1
   # the game is also not built to handle more than 5 so issues may potentially arise with more
-  other_clans_range = [2, 5]
+  other_clans_range = [1, 5]
 
   # range of outsiders to generate upon Clan creation
-  starting_outsiders = [0, 0]
+  starting_outsiders = [0, 2]
 
   # range of cats to pick on quickstart (not counting the leader, deputy, and healer)
-  quickstart_cats = [4, 7]
+  quickstart_cats = [2, 7]
 
   # range of cats to pick on quickstart (not counting the leader, deputy, and healer) for neighbouring Clans in multiclan
-  neighbourclan_cats = [4, 7]
+  neighbourclan_cats = [2, 7]
 
   # number of lives leaders receive - will pick from the list, so something like [7, 8, 9] would have an equal random chance of 7, 8, and 9
   leader_lives_nr = [9]
 
 [genetics_config]
   # 1/chance for newly generated kittypets and other cats to be purebred
-  kittypet_breed = 75
-  other_breed = 1000
+  kittypet_breed = 10
+  other_breed = 50
 
   # when gene boost is applicable, chance will be divided by this value and rounded up. Eg. for chocolate it would be 20/1.5 = 14
   boost_value = 1.5
 
-  chimera = 1000
+  chimera = 500
   identical_twins = 333
   intersex = 100
-  "XXX/XXY" = 1000
-  "X monosomy" = 3500
+  "XXX/XXY" = 300
+  "X monosomy" = 300
   brindled_bicolour = 0
-  pseudo_merle = 200
+  pseudo_merle = 100
   vitiligo = 150
-  random_mutation = 150
+  random_mutation = 10
   somatic_mutation = 200
   breakthrough = 50
   dense_blotched = 50
   cryptic_tortie = 100
-  sectoral_heterochromia = 200
-  random_heterochromia = 250
+  sectoral_heterochromia = 100
+  random_heterochromia = 100
 
   no-low_white_blue_eyes = 150
   low_white_blue_eyes = 100
@@ -759,81 +759,81 @@ dev_tools = false
   # All genes are 1/x chances. They can be set to 0 to prevent it from appearing at all
   longhair = 2
   longtype = ['long', 'long', 'long', 'medium'] #whether a longhair appears as longhair or as a mediumhair
-  cinnamon = 35
-  chocolate = 20
-  red = 4
-  dilute = 2
-  "dominant white" = 40
-  "white spotting" = 3
-  "birman gloving" = 50
-  "thai white" = 400
-  salmiak = 300
-  colourpoint = 10
-  sepia = 20
-  mocha = 300
-  albino = 200
-  silver = 20
+  cinnamon = 10
+  chocolate = 5
+  red = 6
+  dilute = 3
+  "dominant white" = 100
+  "white spotting" = 4
+  "birman gloving" = 20
+  "thai white" = 200
+  salmiak = 15
+  colourpoint = 5
+  sepia = 15
+  mocha = 50
+  albino = 50
+  silver = 18
   solid = 2
-  charcoal = 150
-  blotched = 3
+  charcoal = 50
+  blotched = 2
   ticked = 10
 
-  "pink-eyed dilute" = 400
-  "dilute modifier" = 150
-  grizzle = 275
-  carnelian = 200
-  russet = 250
-  amber = 125
-  sunshine = 125
-  "extreme sunshine" = 125
-  copper = 125
-  karpati = 300
-  bleaching = 400
-  ghosting = 400
-  satin = 400
-  glitter = 150
+  "pink-eyed dilute" = 20
+  "dilute modifier" = 20
+  grizzle = 200
+  carnelian = 40
+  russet = 40
+  amber = 20
+  sunshine = 20
+  "extreme sunshine" = 20
+  copper = 20
+  karpati = 200
+  bleaching = 200
+  ghosting = 300
+  satin = 100
+  glitter = 20
 
-  wirehair = 400
-  laperm = 400
-  cornish = 200
-  urals = 400
-  tenn = 300
-  fleece = 450
-  selkirk = 300
-  devon = 200
-  "canadian hairless" = 300
-  "russian hairless" = 400
-  lykoi = 350
+  wirehair = 250
+  laperm = 125
+  cornish = 20
+  urals = 20
+  tenn = 20
+  fleece = 20
+  selkirk = 100
+  devon = 20
+  "canadian hairless" = 20
+  "russian hairless" = 125
+  lykoi = 20
 
-  curl = 300
-  fold = 300
+  curl = 150
+  fold = 150
   four_ears = 300
-  manx = 300
-  "american bobtail" = 300
-  "karelian bobtail" = 500
-  "kurilian bobtail" = 400
-  "japanese bobtail" = 250
-  toybob = 400
-  ringtail = 400
-  munchkin = 300
-  polydactyl = 150
-  DBE = 150
+  manx = 200
+  "american bobtail" = 200
+  "karelian bobtail" = 200
+  "kurilian bobtail" = 200
+  "japanese bobtail" = 200
+  toybob = 200
+  ringtail = 20
+  munchkin = 150
+  polydactyl = 100
+  DBE = 100
 
   body_ranges = [1, 4, 12, 60, 12, 4, 1]
   height_ranges = [1, 4, 12, 60, 180, 60, 12, 2, 2, 1]
   fur_shade = [0, 1, 1, 2, 2, 2, 3, 3, 3, 4, 4, 4, 5, 5, 6]
   rusting = 0
-  wideband = ["2", "1", "1", "1", "0"]
-  rufousing = ["2", "1", "1", "1", "0"]
+  wideband = ["2", "1", "1", "0"]
+  rufousing = ["2", "1", "1", "0"]
   spotted = ["2", "1", "0"]
-  tickmod = ["2", "1", "1", "1", "0", "0", "0", "0", "0", "0", "0"]
-  bengal = ["2", "1", "1", "1", "0", "0", "0", "0", "0", "0", "0"]
+  tickmod = ["2", "1", "1", "1", "0", "0", "0", "0", "0", "0"]
+  bengal = ["2", "1", "1", "1", "0", "0", "0", "0", "0", "0"]
   sokoke = ["2", "2", "1", "1", "1", "1", "0", "0", "0"]
   wideband_kittypet = ["2", "1", "1", "0"]
   rufousing_kittypet = ["2", "1", "1", "0"]
   spotted_kittypet = ["2", "1", "0"]
-  tickmod_kittypet = ["2", "1", "1", "1", "0", "0", "0", "0", "0"]
-  bengal_kittypet = ["2", "1", "1", "1", "0", "0", "0", "0", "0"]
+  tickmod_kittypet = ["2", "1", "1", "1", "0", "0", "0", "0"]
+  bengal_kittypet = ["2", "1", "1", "1", "0", "0", "0", "0"]
   sokoke_kittypet = ["2", "2", "1", "1", "1", "1", "0", "0", "0"]
 
 [april_fools_genes]
@@ -845,10 +845,10 @@ dev_tools = false
 
 [tnr_mode]
   # chance for kittypets and other outsiders to generate as already spayed/neutered
-  kittypet_neuter = 0.8
+  kittypet_neuter = 0.6
   loner_tnr = 0.05
   # chance for cats lost to Twolegs to be spayed/neutered. clan_tnr2 is for events not explicitly reminiscent of TNR programs
-  clan_tnr = 0.99
+  clan_tnr = 0.8
   clan_tnr2 = 0.5
 
 [graduation]
