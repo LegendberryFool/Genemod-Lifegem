@@ -30,10 +30,10 @@ EVENTS_PER_PAGE = 10
 BIOME_TYPES = ["Forest", "Plains", "Mountainous", "Beach", "Wetlands", "Desert"]
 
 CAMPS: dict = {
-    "Forest": ["Classic", "Gully", "Grotto", "Lakeside"],
-    "Mountainous": ["Cliff", "Cavern", "Crystal River", "Ruins"],
-    "Plains": ["Grasslands", "Tunnels", "Wastelands", "Bridge"],
-    "Beach": ["Tidepools", "Tidal Cave", "Shipwreck", "Fjord"],
+    "Forest": ["Classic", "Gully", "Grotto", "Lakeside", "Pine", "Birch"],
+    "Mountainous": ["Cliff", "Cavern", "Crystal River", "Taiga", "Rocky Slope", "Quarry", "Ruins"],
+    "Plains": ["Grasslands", "Tunnels", "Wastelands", "Desert", "City", "Farm", "Bushland", "Castle", "Bridge"],
+    "Beach": ["Tidepools", "Tidal Cave", "Shipwreck", "Fjord", "Tropical_Island", "Quay"],
 }
 
 SEASONS = ["Newleaf", "Greenleaf", "Leaf-fall", "Leaf-bare"]
