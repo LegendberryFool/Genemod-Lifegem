@@ -854,7 +854,7 @@ def handle_focus():
         if get_clan_setting("sabotage_other_clans"):
             amount = amount * -1
         for name in game.clan.clans_in_focus:
-            clan = [clan for clan in game.clan.all_other_clans if clan.prefix == name][0]
+            clan = [clan for clan in game.clan.all_other_clans if clan.name == name][0]
             change_clan_relations(game.clan, clan, amount)
         focus_text = None
 
@@ -932,7 +932,7 @@ def handle_focus():
         # if it is raiding, lower the relation to other clans
         if get_clan_setting("raid_other_clans"):
             for name in game.clan.clans_in_focus:
-                clan = [clan for clan in game.clan.all_other_clans if clan.prefix == name][0]
+                clan = [clan for clan in game.clan.all_other_clans if clan.name == name][0]
                 amount = -info_dict["relation"]
                 change_clan_relations(game.clan, clan, amount)
 
@@ -1629,7 +1629,7 @@ def perform_ceremonies(cat, clan):
         #  outside, or doesn't exist, make the deputy leader.
         if (
             clan.deputy is not None
-            and not clan.deputy.status.group_ID != clan.group_ID
+            and clan.deputy.status.group_ID == clan.group_ID
             and (leader_dead or leader_outside)
             and cat.status.rank == CatRank.DEPUTY
         ):
@@ -2292,6 +2292,9 @@ def ceremony(cat, promoted_to, preparedness="prepared"):
         Single_Event(ceremony_text, "ceremony", involved_cats, clan=clan.group_ID)
     )
     # game.ceremony_events_list.append(f'{cat.name}{ceremony_text}')
+    
+    if promoted_to == CatRank.LEADER:
+        clan.new_leader(cat)
 
 def gain_accessories(cat, clan):
     """
