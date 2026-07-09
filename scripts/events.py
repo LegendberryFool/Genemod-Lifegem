@@ -2275,6 +2275,9 @@ def ceremony(cat, promoted_to, preparedness="prepared"):
         Single_Event(ceremony_text, "ceremony", involved_cats, clan=clan.group_ID)
     )
     # game.ceremony_events_list.append(f'{cat.name}{ceremony_text}')
+    
+    if promoted_to == CatRank.LEADER:
+        clan.new_leader(cat)
 
     if promoted_to == CatRank.LEADER:
         clan.new_leader(cat)
