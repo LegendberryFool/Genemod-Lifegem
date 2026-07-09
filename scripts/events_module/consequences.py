@@ -524,7 +524,7 @@ def create_new_cat_block(
         generated_parents = []
         if rank in (CatRank.KITTEN, CatRank.NEWBORN) or age in range(Cat.age_moons[CatAge.KITTEN][0], Cat.age_moons[CatAge.KITTEN][1]+1) or parent1:
             generated_parents = create_bio_parents(
-               Cat, flip=True if parent1 and 'Y' in parent1.phenotype.sexgene else False, second_parent=not parent1, age=parent1.moons if parent1 else None, clan=cat_group if cat_social == CatSocial.CLANCAT else None)
+                Cat, flip=True if parent1 and 'Y' in parent1.phenotype.sexgene else False, second_parent=not parent1, age=parent1.moons if parent1 else None, clan=cat_group if cat_social == CatSocial.CLANCAT else None)
             if not parent1:
                 parent1 = generated_parents[1]
             if not parent2:
