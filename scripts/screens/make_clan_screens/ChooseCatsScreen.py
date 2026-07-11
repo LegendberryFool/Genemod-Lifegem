@@ -587,6 +587,7 @@ class ChooseCatsScreen(MakeClanScreenBase):
                     ui_scale_dimensions((800, 260)),
                 ),
                 manager=MANAGER,
+                visible=self.need_leader,
             )
             self.elements["deputy"] = pygame_gui.elements.UIImage(
                 ui_scale(pygame.Rect((0, 440), (800, 260))),

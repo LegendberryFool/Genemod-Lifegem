@@ -1556,12 +1556,24 @@ def generate_sprite(
                 "tail_accessories",
                 "body_accessories",
                 "head_accessories",
+                # LG
+                "paw_accessories"
             ]
             for category in categories:
                 for accessory in cat_accessories:
                     if accessory in getattr(Pelt, category):
                         if accessory in cat.pelt.plant_accessories:
                             sprite_name = f"{sprites.PLANT_DATA['spritesheet']}{accessory}{cat_sprite}"
+                            new_sprite.blit(
+                                _recolor_lineart(
+                                    sprites.sprites[sprite_name],
+                                    lineart_color,
+                                    gradient_surface,
+                                ),
+                                (0, 0),
+                            )
+                        elif accessory in cat.pelt.plant2_accessories:
+                            sprite_name = f"{sprites.PLANT2_DATA['spritesheet']}{accessory}{cat_sprite}"
                             new_sprite.blit(
                                 _recolor_lineart(
                                     sprites.sprites[sprite_name],
@@ -1580,8 +1592,108 @@ def generate_sprite(
                                 ),
                                 (0, 0),
                             )
+                        elif accessory in cat.pelt.wild2_accessories:
+                            sprite_name = f"{sprites.WILD2_DATA['spritesheet']}{accessory}{cat_sprite}"
+                            new_sprite.blit(
+                                _recolor_lineart(
+                                    sprites.sprites[sprite_name],
+                                    lineart_color,
+                                    gradient_surface,
+                                ),
+                                (0, 0),
+                            )                      
                         elif accessory in cat.pelt.collar_accessories:
                             sprite_name = f"{sprites.COLLAR_DATA['spritesheet']}{accessory}{cat_sprite}"
+                            new_sprite.blit(
+                                _recolor_lineart(
+                                    sprites.sprites[sprite_name],
+                                    lineart_color,
+                                    gradient_surface,
+                                ),
+                                (0, 0),
+                            )
+                        elif accessory in cat.pelt.harness_accessories:
+                            sprite_name = f"{sprites.HARNESS_DATA['spritesheet']}{accessory}{cat_sprite}"
+                            new_sprite.blit(
+                                _recolor_lineart(
+                                    sprites.sprites[sprite_name],
+                                    lineart_color,
+                                    gradient_surface,
+                                ),
+                                (0, 0),
+                            )
+                        elif accessory in cat.pelt.deadInsect_accessories:
+                            sprite_name = f"{sprites.DEADINSECT_DATA['spritesheet']}{accessory}{cat_sprite}"
+                            new_sprite.blit(
+                                _recolor_lineart(
+                                    sprites.sprites[sprite_name],
+                                    lineart_color,
+                                    gradient_surface,
+                                ),
+                                (0, 0),
+                            )
+                        elif accessory in cat.pelt.aliveInsect_accessories:
+                            sprite_name = f"{sprites.ALIVEINSECT_DATA['spritesheet']}{accessory}{cat_sprite}"
+                            new_sprite.blit(
+                                _recolor_lineart(
+                                    sprites.sprites[sprite_name],
+                                    lineart_color,
+                                    gradient_surface,
+                                ),
+                                (0, 0),
+                            )
+                        elif accessory in cat.pelt.smallanimals_accessories:
+                            sprite_name = f"{sprites.SMALLANIMALS_DATA['spritesheet']}{accessory}{cat_sprite}"
+                            new_sprite.blit(
+                                _recolor_lineart(
+                                    sprites.sprites[sprite_name],
+                                    lineart_color,
+                                    gradient_surface,
+                                ),
+                                (0, 0),
+                            )
+                        elif accessory in cat.pelt.flower_crown_accessories:
+                            sprite_name = f"{sprites.FLOWERCROWNS_DATA['spritesheet']}{accessory}{cat_sprite}"
+                            new_sprite.blit(
+                                _recolor_lineart(
+                                    sprites.sprites[sprite_name],
+                                    lineart_color,
+                                    gradient_surface,
+                                ),
+                                (0, 0),
+                            )
+                        elif accessory in cat.pelt.fruit_accessories:
+                            sprite_name = f"{sprites.FRUIT_DATA['spritesheet']}{accessory}{cat_sprite}"
+                            new_sprite.blit(
+                                _recolor_lineart(
+                                    sprites.sprites[sprite_name],
+                                    lineart_color,
+                                    gradient_surface,
+                                ),
+                                (0, 0),
+                            )
+                        elif accessory in cat.pelt.misc_accessories:
+                            sprite_name = f"{sprites.MISC_ACCS_DATA_DATA['spritesheet']}{accessory}{cat_sprite}"
+                            new_sprite.blit(
+                                _recolor_lineart(
+                                    sprites.sprites[sprite_name],
+                                    lineart_color,
+                                    gradient_surface,
+                                ),
+                                (0, 0),
+                            )
+                        elif accessory in cat.pelt.misc2_accessories:
+                            sprite_name = f"{sprites.MISC2_ACCS_DATA['spritesheet']}{accessory}{cat_sprite}"
+                            new_sprite.blit(
+                                _recolor_lineart(
+                                    sprites.sprites[sprite_name],
+                                    lineart_color,
+                                    gradient_surface,
+                                ),
+                                (0, 0),
+                            )
+                        elif accessory in cat.pelt.sophisticated_accessories:
+                            sprite_name = f"{sprites.SOPHISTICATED_DATA['spritesheet']}{accessory}{cat_sprite}"
                             new_sprite.blit(
                                 _recolor_lineart(
                                     sprites.sprites[sprite_name],

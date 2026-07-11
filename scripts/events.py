@@ -1753,6 +1753,53 @@ def perform_ceremonies(cat, clan):
                     ceremony(cat, CatRank.APPRENTICE)
                     ceremony_accessory = True
                     gain_accessories(cat, clan)
+                else:
+                    ceremony(cat, CatRank.APPRENTICE)
+                    ceremony_accessory = True
+                    gain_accessories(cat, clan)
+
+    # graduate
+    if cat.status.rank.is_any_apprentice_rank():
+        if get_clan_setting("12_moon_graduation"):
+            _ready = cat.moons >= 12
+        else:
+            graduation_info = get_config("graduation")
+            _ready = (
+                cat.experience_level not in ["untrained", "learning"]
+                and cat.moons >= graduation_info["min_graduating_age"]
+            ) or cat.moons >= graduation_info["max_apprentice_age"][cat.status.rank]
+
+        if _ready:
+            if get_clan_setting("12_moon_graduation"):
+                preparedness = "prepared"
+            else:
+                if cat.moons == graduation_info["min_graduating_age"]:
+                    preparedness = "early"
+                elif cat.experience_level in ["untrained", "learning"]:
+                    preparedness = "unprepared"
+                else:
+                    preparedness = "prepared"
+
+            if cat.status.rank == CatRank.APPRENTICE:
+                ceremony(cat, CatRank.WARRIOR, preparedness)
+                ceremony_accessory = True
+                gain_accessories(cat, clan)
+
+            # promote to med cat
+            elif cat.status.rank == CatRank.MEDICINE_APPRENTICE:
+                ceremony(cat, CatRank.MEDICINE_CAT, preparedness)
+                ceremony_accessory = True
+                gain_accessories(cat, clan)
+
+            elif cat.status.rank == CatRank.MEDIATOR_APPRENTICE:
+                ceremony(cat, CatRank.MEDIATOR, preparedness)
+                ceremony_accessory = True
+                gain_accessories(cat, clan)
+
+            elif cat.status.rank == CatRank.QUEEN_APPRENTICE:
+                ceremony(cat, CatRank.QUEEN, preparedness)
+                ceremony_accessory = True
+                gain_accessories(cat, clan)
 
     # graduate
     if cat.status.rank.is_any_apprentice_rank():
@@ -2275,6 +2322,12 @@ def ceremony(cat, promoted_to, preparedness="prepared"):
         Single_Event(ceremony_text, "ceremony", involved_cats, clan=clan.group_ID)
     )
     # game.ceremony_events_list.append(f'{cat.name}{ceremony_text}')
+    
+    if promoted_to == CatRank.LEADER:
+        clan.new_leader(cat)
+
+    if promoted_to == CatRank.LEADER:
+        clan.new_leader(cat)
 
     if promoted_to == CatRank.LEADER:
         clan.new_leader(cat)
