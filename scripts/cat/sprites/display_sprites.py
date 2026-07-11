@@ -1638,7 +1638,7 @@ def generate_sprite(
                                 (0, 0),
                             )
                         elif accessory in cat.pelt.misc_accessories:
-                            sprite_name = f"{sprites.MISC_ACCS_DATA_DATA['spritesheet']}{accessory}{cat_sprite}"
+                            sprite_name = f"{sprites.MISC_ACCS_DATA['spritesheet']}{accessory}{cat_sprite}"
                             new_sprite.blit(
                                 _recolor_lineart(
                                     sprites.sprites[sprite_name],
