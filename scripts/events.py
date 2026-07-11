@@ -1753,11 +1753,7 @@ def perform_ceremonies(cat, clan):
                     ceremony(cat, CatRank.APPRENTICE)
                     ceremony_accessory = True
                     gain_accessories(cat, clan)
-                else:
-                    ceremony(cat, CatRank.APPRENTICE)
-                    ceremony_accessory = True
-                    gain_accessories(cat, clan)
-
+                    
     # graduate
     if cat.status.rank.is_any_apprentice_rank():
         if get_clan_setting("12_moon_graduation"):
@@ -2323,12 +2319,6 @@ def ceremony(cat, promoted_to, preparedness="prepared"):
     )
     # game.ceremony_events_list.append(f'{cat.name}{ceremony_text}')
     
-    if promoted_to == CatRank.LEADER:
-        clan.new_leader(cat)
-
-    if promoted_to == CatRank.LEADER:
-        clan.new_leader(cat)
-
     if promoted_to == CatRank.LEADER:
         clan.new_leader(cat)
 
