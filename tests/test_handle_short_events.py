@@ -83,7 +83,7 @@ class TestHandleAccessories(unittest.TestCase):
 
     def test_cat_gets_test_accessory(self):
         self.chosen_event.execute_event(clan=self.clan)
-        self.assertEqual(self.chosen_event.main_cat.pelt.accessory, ("TEST",))
+        self.assertEqual(self.chosen_event.main_cat.pelt.accessory, ["TEST",])
 
     def test_cat_gets_random_wild_accessory(self):
         self.chosen_event.new_accessory = ["WILD"]

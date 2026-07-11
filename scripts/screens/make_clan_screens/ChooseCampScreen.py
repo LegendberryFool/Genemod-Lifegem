@@ -1,4 +1,4 @@
-from random import randrange
+from random import randrange, random
 
 import i18n
 import pygame
@@ -54,7 +54,7 @@ class ChooseCampScreen(MakeClanScreenBase):
             prev_element = self.elements[f"{biome}_biome"]
 
         # Camp Art Choosing Tabs, Dummy buttons, will be overridden.
-        for i in range(1, 5):
+        for i in range(0, 11):
             self.tabs[f"tab{i}"] = UIImageButton(
                 ui_scale(pygame.Rect((0, 0), (0, 0))),
                 "",
@@ -135,6 +135,24 @@ class ChooseCampScreen(MakeClanScreenBase):
             elif event.ui_element == self.tabs["tab4"]:
                 self.selected_camp_tab = 4
                 self.refresh_selected_camp()
+            elif event.ui_element == self.tabs["tab5"]:
+                self.selected_camp_tab = 5
+                self.refresh_selected_camp()
+            elif event.ui_element == self.tabs["tab6"]:
+                self.selected_camp_tab = 6
+                self.refresh_selected_camp()
+            elif event.ui_element == self.tabs["tab7"]:
+                self.selected_camp_tab = 7
+                self.refresh_selected_camp()
+            elif event.ui_element == self.tabs["tab8"]:
+                self.selected_camp_tab = 8
+                self.refresh_selected_camp()
+            elif event.ui_element == self.tabs["tab9"]:
+                self.selected_camp_tab = 9
+                self.refresh_selected_camp()
+            elif event.ui_element == self.tabs["tab10"]:
+                self.selected_camp_tab = 10
+                self.refresh_selected_camp()
             elif event.ui_element == self.tabs["newleaf_tab"]:
                 if self.get_config_during_creation("seasons.lock_season"):
                     CruelLockedAction()
@@ -162,7 +180,16 @@ class ChooseCampScreen(MakeClanScreenBase):
             elif event.ui_element == self.elements["random_background"]:
                 # Select a random biome and background
                 self.clan_info.biome = self.random_biome_selection()
-                self.selected_camp_tab = randrange(1, 5)
+                # self.selected_camp_tab = randrange(1,11)
+                if self.clan_info.biome == "Forest":
+                    self.selected_camp_tab = randrange(1,7)
+                elif self.clan_info.biome == "Mountainous":
+                    self.selected_camp_tab = randrange(1,8)
+                elif self.clan_info.biome == "Plains":
+                    self.selected_camp_tab = randrange(1,10)
+                elif self.clan_info.biome == "Beach":
+                    self.selected_camp_tab = randrange(1,7)
+                
                 self.clan_info.camp_bg = f"camp{self.selected_camp_tab}"
                 self.refresh_selected_camp()
                 self.refresh_text_and_buttons()
@@ -228,6 +255,12 @@ class ChooseCampScreen(MakeClanScreenBase):
         self.tabs["tab2"].kill()
         self.tabs["tab3"].kill()
         self.tabs["tab4"].kill()
+        self.tabs["tab5"].kill()
+        self.tabs["tab6"].kill()
+        self.tabs["tab7"].kill()
+        self.tabs["tab8"].kill()
+        self.tabs["tab9"].kill()
+        self.tabs["tab10"].kill()
 
         if self.clan_info.biome == "Forest":
             tab_rect = ui_scale(pygame.Rect((0, 0), (85, 30)))
@@ -283,6 +316,34 @@ class ChooseCampScreen(MakeClanScreenBase):
                     "top_target": self.tabs["tab3"],
                 },
             )
+            tab_rect = ui_scale(pygame.Rect((0, 0), (70, 30)))
+            tab_rect.topright = ui_scale_offset((5, 5))
+            self.tabs["tab5"] = UISurfaceImageButton(
+                tab_rect,
+                "screens.make_clan.camp_pine",
+                get_button_dict(ButtonStyles.VERTICAL_TAB, (70, 30)),
+                object_id="@buttonstyles_vertical_tab",
+                manager=MANAGER,
+                anchors={
+                    "right": "right",
+                    "right_target": self.elements["art_frame"],
+                    "top_target": self.tabs["tab4"],
+                },
+            )
+            tab_rect = ui_scale(pygame.Rect((0, 0), (70, 30)))
+            tab_rect.topright = ui_scale_offset((5, 5))
+            self.tabs["tab6"] = UISurfaceImageButton(
+                tab_rect,
+                "screens.make_clan.camp_birch",
+                get_button_dict(ButtonStyles.VERTICAL_TAB, (70, 30)),
+                object_id="@buttonstyles_vertical_tab",
+                manager=MANAGER,
+                anchors={
+                    "right": "right",
+                    "right_target": self.elements["art_frame"],
+                    "top_target": self.tabs["tab5"],
+                },
+            )
         elif self.clan_info.biome == "Mountainous":
             tab_rect = ui_scale(pygame.Rect((0, 0), (70, 30)))
             tab_rect.topright = ui_scale_offset((5, 180))
@@ -327,7 +388,7 @@ class ChooseCampScreen(MakeClanScreenBase):
             tab_rect.topright = ui_scale_offset((5, 5))
             self.tabs["tab4"] = UISurfaceImageButton(
                 tab_rect,
-                "screens.make_clan.camp_ruins",
+                "screens.make_clan.camp_taiga",
                 get_button_dict(ButtonStyles.VERTICAL_TAB, (80, 30)),
                 object_id="@buttonstyles_vertical_tab",
                 manager=MANAGER,
@@ -335,6 +396,48 @@ class ChooseCampScreen(MakeClanScreenBase):
                     "right": "right",
                     "right_target": self.elements["art_frame"],
                     "top_target": self.tabs["tab3"],
+                },
+            )
+            tab_rect = ui_scale(pygame.Rect((0, 0), (120, 30)))
+            tab_rect.topright = ui_scale_offset((5, 5))
+            self.tabs["tab5"] = UISurfaceImageButton(
+                tab_rect,
+                "screens.make_clan.camp_rocky_slope",
+                get_button_dict(ButtonStyles.VERTICAL_TAB, (120, 30)),
+                object_id="@buttonstyles_vertical_tab",
+                manager=MANAGER,
+                anchors={
+                    "right": "right",
+                    "right_target": self.elements["art_frame"],
+                    "top_target": self.tabs["tab4"],
+                },
+            )
+            tab_rect = ui_scale(pygame.Rect((0, 0), (90, 30)))
+            tab_rect.topright = ui_scale_offset((5, 5))
+            self.tabs["tab6"] = UISurfaceImageButton(
+                tab_rect,
+                "screens.make_clan.camp_quarry",
+                get_button_dict(ButtonStyles.VERTICAL_TAB, (90, 30)),
+                object_id="@buttonstyles_vertical_tab",
+                manager=MANAGER,
+                anchors={
+                    "right": "right",
+                    "right_target": self.elements["art_frame"],
+                    "top_target": self.tabs["tab5"],
+                },
+            )
+            tab_rect = ui_scale(pygame.Rect((0, 0), (80, 30)))
+            tab_rect.topright = ui_scale_offset((5, 5))
+            self.tabs["tab7"] = UISurfaceImageButton(
+                tab_rect,
+                "screens.make_clan.camp_ruins",
+                get_button_dict(ButtonStyles.VERTICAL_TAB, (80, 30)),
+                object_id="@buttonstyles_vertical_tab",
+                manager=MANAGER,
+                anchors={
+                    "right": "right",
+                    "right_target": self.elements["art_frame"],
+                    "top_target": self.tabs["tab6"],
                 },
             )
         elif self.clan_info.biome == "Plains":
@@ -389,6 +492,76 @@ class ChooseCampScreen(MakeClanScreenBase):
                     "right": "right",
                     "right_target": self.elements["art_frame"],
                     "top_target": self.tabs["tab3"],
+                },
+            )
+            tab_rect = ui_scale(pygame.Rect((0, 0), (80, 30)))
+            tab_rect.topright = ui_scale_offset((5, 5))
+            self.tabs["tab5"] = UISurfaceImageButton(
+                tab_rect,
+                "screens.make_clan.camp_desert",
+                get_button_dict(ButtonStyles.VERTICAL_TAB, (80, 30)),
+                object_id="@buttonstyles_vertical_tab",
+                manager=MANAGER,
+                anchors={
+                    "right": "right",
+                    "right_target": self.elements["art_frame"],
+                    "top_target": self.tabs["tab4"],
+                },
+            )
+            tab_rect = ui_scale(pygame.Rect((0, 0), (65, 30)))
+            tab_rect.topright = ui_scale_offset((5, 5))
+            self.tabs["tab6"] = UISurfaceImageButton(
+                tab_rect,
+                "screens.make_clan.camp_city",
+                get_button_dict(ButtonStyles.VERTICAL_TAB, (65, 30)),
+                object_id="@buttonstyles_vertical_tab",
+                manager=MANAGER,
+                anchors={
+                    "right": "right",
+                    "right_target": self.elements["art_frame"],
+                    "top_target": self.tabs["tab5"],
+                },
+            )
+            tab_rect = ui_scale(pygame.Rect((0, 0), (70, 30)))
+            tab_rect.topright = ui_scale_offset((5, 5))
+            self.tabs["tab7"] = UISurfaceImageButton(
+                tab_rect,
+                "screens.make_clan.camp_farm",
+                get_button_dict(ButtonStyles.VERTICAL_TAB, (70, 30)),
+                object_id="@buttonstyles_vertical_tab",
+                manager=MANAGER,
+                anchors={
+                    "right": "right",
+                    "right_target": self.elements["art_frame"],
+                    "top_target": self.tabs["tab6"],
+                },
+            )
+            tab_rect = ui_scale(pygame.Rect((0, 0), (100, 30)))
+            tab_rect.topright = ui_scale_offset((5, 5))
+            self.tabs["tab8"] = UISurfaceImageButton(
+                tab_rect,
+                "screens.make_clan.camp_bushland",
+                get_button_dict(ButtonStyles.VERTICAL_TAB, (100, 30)),
+                object_id="@buttonstyles_vertical_tab",
+                manager=MANAGER,
+                anchors={
+                    "right": "right",
+                    "right_target": self.elements["art_frame"],
+                    "top_target": self.tabs["tab7"],
+                },
+            )
+            tab_rect = ui_scale(pygame.Rect((0, 0), (80, 30)))
+            tab_rect.topright = ui_scale_offset((5, 5))
+            self.tabs["tab9"] = UISurfaceImageButton(
+                tab_rect,
+                "screens.make_clan.camp_castle",
+                get_button_dict(ButtonStyles.VERTICAL_TAB, (80, 30)),
+                object_id="@buttonstyles_vertical_tab",
+                manager=MANAGER,
+                anchors={
+                    "right": "right",
+                    "right_target": self.elements["art_frame"],
+                    "top_target": self.tabs["tab8"],
                 },
             )
         elif self.clan_info.biome == "Beach":
@@ -447,11 +620,46 @@ class ChooseCampScreen(MakeClanScreenBase):
                     "top_target": self.tabs["tab3"],
                 },
             )
+            
+            tab_rect = ui_scale(pygame.Rect((0, 0), (145, 30)))
+            tab_rect.topright = ui_scale_offset((5, 5))
+            self.tabs["tab5"] = UISurfaceImageButton(
+                tab_rect,
+                "screens.make_clan.camp_tropical_island",
+                get_button_dict(ButtonStyles.VERTICAL_TAB, (145, 30)),
+                object_id="@buttonstyles_vertical_tab",
+                manager=MANAGER,
+                anchors={
+                    "right": "right",
+                    "right_target": self.elements["art_frame"],
+                    "top_target": self.tabs["tab4"],
+                },
+            )
+            tab_rect = ui_scale(pygame.Rect((0, 0), (70, 30)))
+            tab_rect.topright = ui_scale_offset((5, 5))
+            self.tabs["tab6"] = UISurfaceImageButton(
+                tab_rect,
+                "screens.make_clan.camp_quay",
+                get_button_dict(ButtonStyles.VERTICAL_TAB, (70, 30)),
+                object_id="@buttonstyles_vertical_tab",
+                manager=MANAGER,
+                anchors={
+                    "right": "right",
+                    "right_target": self.elements["art_frame"],
+                    "top_target": self.tabs["tab5"],
+                },
+            )
 
         self.tabs["tab1"].enable()
         self.tabs["tab2"].enable()
         self.tabs["tab3"].enable()
         self.tabs["tab4"].enable()
+        self.tabs["tab5"].enable()
+        self.tabs["tab6"].enable()
+        self.tabs["tab7"].enable()
+        self.tabs["tab8"].enable()
+        self.tabs["tab9"].enable()
+        self.tabs["tab10"].enable()
         if self.selected_camp_tab:
             self.tabs[f"tab{self.selected_camp_tab}"].disable()
 

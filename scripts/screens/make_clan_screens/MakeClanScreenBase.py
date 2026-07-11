@@ -309,10 +309,10 @@ class MakeClanScreenBase(Screens):
                     weights = get_config("cat_name_controls.kittypet")
                     # check if the kittypets come with a pretty acc
                     if bool(getrandbits(1)):
-                        c.pelt.accessory = (
+                        c.pelt.accessory = tuple(
                             *c.pelt.accessory,
-                            choice(c.pelt.collar_accessories),
-                        )
+                [choice([choice(c.pelt.collar_accessories), choice(c.pelt.collar_accessories), choice(c.pelt.harness_accessories)])]
+            )
                 if random_social == CatSocial.LONER:
                     weights = get_config("cat_name_controls.loner")
 
