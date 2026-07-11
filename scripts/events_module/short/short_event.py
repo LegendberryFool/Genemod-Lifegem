@@ -519,9 +519,32 @@ class ShortEvent:
             acc_list.extend(Pelt.plant_accessories)
         if "COLLAR" in possible_accs:
             acc_list.extend(Pelt.collar_accessories)
+        if "ALIVEINSECT" in possible_accs:
+            acc_list.extend(Pelt.aliveInsect_accessories)
+        if "DEADINSECT" in possible_accs:
+            acc_list.extend(Pelt.deadInsect_accessories)
+        if "PLANT2" in possible_accs:
+            acc_list.extend(Pelt.plant2_accessories)
+        if "SOPHISTICATED" in possible_accs:
+            acc_list.extend(Pelt.sophisticated_accessories)
+        if "FRUIT" in possible_accs:
+            acc_list.extend(Pelt.fruit_accessories)
+        if "FLOWERCROWN" in possible_accs:
+            acc_list.extend(Pelt.flower_crown_accessories)
+        if "MISC" in possible_accs:
+            acc_list.extend(Pelt.misc_accessories)
+        if "MISC2" in possible_accs:
+            acc_list.extend(Pelt.misc2_accessories)
+        if "HARNESS" in possible_accs:
+            acc_list.extend(Pelt.harness_accessories)
+        if "SMALLANIMALS" in possible_accs:
+            acc_list.extend(Pelt.smallanimals_accessories)
+        if "WILD2" in possible_accs:
+            acc_list.extend(Pelt.wild2_accessories)
 
         for acc in possible_accs:
-            if acc not in ("WILD", "PLANT", "COLLAR"):
+            if acc not in ("WILD", "PLANT", "COLLAR", "ALIVEINSECT", "DEADINSECT", "PLANT2", "SOPHISTICATED",
+                           "FRUIT," "FLOWERCROWN", "MISC", "MISC2", "HARNESS", "SMALLANIMALS", "WILD2",):
                 acc_list.append(acc)
 
         if hasattr(self.main_cat.pelt, "scars"):

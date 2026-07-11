@@ -446,7 +446,7 @@ dev_tools = false
 
 [accessory_generation]
   # base 1/chance a cat generates with an accessory 
-  base_acc_chance = 100
+  base_acc_chance = 60
 
   # modifiers for accessories add or subtract from chance IN THE DENOMINATOR 
   #   i.e. 1/(chance + med_modifier + baby_modifier + elder_modifier + ...)
@@ -462,16 +462,16 @@ dev_tools = false
   elder_modifier = 0
 
   # modifies accessory chance based on if cat has "happy" traits
-  happy_trait_modifier = -20
+  happy_trait_modifier = -10
 
   # modifies accessory chance based on if cat has "grumpy" traits
   grumpy_trait_modifier = 0
 
   # modifies accessory chance based on if cat had a ceremony
-  ceremony_modifier = -70
+  ceremony_modifier = -20
 
   # modifies accessory chance based on if cat already has at least one other accessory
-  multiple_acc_modifier = 50
+  multiple_acc_modifier = 80
 
 [transition_related]
   # base 1/chance that a cat will trans their gender
@@ -720,7 +720,7 @@ dev_tools = false
 
 [clan_creation]
   # Set this to -1 for it to be infinite
-  rerolls = 3 
+  rerolls = -1
   
   # other clans will start with a random relation between the two numbers
   starting_clan_relation = [8, 12]
