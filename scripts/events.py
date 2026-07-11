@@ -854,7 +854,7 @@ def handle_focus():
         if get_clan_setting("sabotage_other_clans"):
             amount = amount * -1
         for name in game.clan.clans_in_focus:
-            clan = [clan for clan in game.clan.all_other_clans if clan.name == name][0]
+            clan = [clan for clan in game.clan.all_other_clans if clan.name == name or clan.prefix == name][0]
             change_clan_relations(game.clan, clan, amount)
         focus_text = None
 
@@ -1753,6 +1753,53 @@ def perform_ceremonies(cat, clan):
                     ceremony(cat, CatRank.APPRENTICE)
                     ceremony_accessory = True
                     gain_accessories(cat, clan)
+                else:
+                    ceremony(cat, CatRank.APPRENTICE)
+                    ceremony_accessory = True
+                    gain_accessories(cat, clan)
+
+    # graduate
+    if cat.status.rank.is_any_apprentice_rank():
+        if get_clan_setting("12_moon_graduation"):
+            _ready = cat.moons >= 12
+        else:
+            graduation_info = get_config("graduation")
+            _ready = (
+                cat.experience_level not in ["untrained", "learning"]
+                and cat.moons >= graduation_info["min_graduating_age"]
+            ) or cat.moons >= graduation_info["max_apprentice_age"][cat.status.rank]
+
+        if _ready:
+            if get_clan_setting("12_moon_graduation"):
+                preparedness = "prepared"
+            else:
+                if cat.moons == graduation_info["min_graduating_age"]:
+                    preparedness = "early"
+                elif cat.experience_level in ["untrained", "learning"]:
+                    preparedness = "unprepared"
+                else:
+                    preparedness = "prepared"
+
+            if cat.status.rank == CatRank.APPRENTICE:
+                ceremony(cat, CatRank.WARRIOR, preparedness)
+                ceremony_accessory = True
+                gain_accessories(cat, clan)
+
+            # promote to med cat
+            elif cat.status.rank == CatRank.MEDICINE_APPRENTICE:
+                ceremony(cat, CatRank.MEDICINE_CAT, preparedness)
+                ceremony_accessory = True
+                gain_accessories(cat, clan)
+
+            elif cat.status.rank == CatRank.MEDIATOR_APPRENTICE:
+                ceremony(cat, CatRank.MEDIATOR, preparedness)
+                ceremony_accessory = True
+                gain_accessories(cat, clan)
+
+            elif cat.status.rank == CatRank.QUEEN_APPRENTICE:
+                ceremony(cat, CatRank.QUEEN, preparedness)
+                ceremony_accessory = True
+                gain_accessories(cat, clan)
 
     # graduate
     if cat.status.rank.is_any_apprentice_rank():
@@ -2282,6 +2329,9 @@ def ceremony(cat, promoted_to, preparedness="prepared"):
     if promoted_to == CatRank.LEADER:
         clan.new_leader(cat)
 
+    if promoted_to == CatRank.LEADER:
+        clan.new_leader(cat)
+
 def gain_accessories(cat, clan):
     """
     accessories
@@ -2366,7 +2416,7 @@ def handle_outside_EX(cat):
         if cat.age == CatAge.KITTEN:
             return
 
-        exp_info = get_config("outside_ex")
+        exp_info = get_config("outsiders.outside_ex")
 
         if cat.age == CatAge.ADOLESCENT:
             ran = exp_info["base_adolescent_timeskip_ex"]
@@ -2811,10 +2861,10 @@ def handle_illnesses_or_illness_deaths(cat, clan):
     #                           decide if cat dies                                 #
     # ---------------------------------------------------------------------------- #
     # if triggered_death is True then the cat will die
-    triggered_death = False
-    triggered_death = Condition_Events.handle_illnesses(
-        cat, game.clan.current_season, clan=clan
-    )
+    triggered_death = Condition_Events.handle_illnesses(cat, game.clan.current_season, clan=clan)
+    if not triggered_death:
+        handle_outbreaks(cat, clan)
+
     return triggered_death
 
 def handle_outbreaks(cat, clan):
@@ -2834,7 +2884,7 @@ def handle_outbreaks(cat, clan):
     already_sick_count = len(already_sick)
 
     # round up the living kitties
-    alive_cats = list(
+    healthy_cats = list(
         filter(
             lambda kitty: (
                 kitty.status.group_ID == clan.group_ID and not kitty.is_ill()
@@ -2842,10 +2892,12 @@ def handle_outbreaks(cat, clan):
             Cat.all_cats.values(),
         )
     )
-    alive_count = len(alive_cats)
+    healthy_count = len(healthy_cats)
 
     # if large amount of the population is already sick, stop spreading
-    if already_sick_count >= alive_count * 0.25:
+    if already_sick_count >= healthy_count * get_config(
+        "condition_related.illness_percentage_max"
+    ):
         return
 
     meds = find_alive_cats_with_rank(
@@ -2861,11 +2913,12 @@ def handle_outbreaks(cat, clan):
         if cat.illnesses[illness]["infectiousness"] == 0:
             continue
         chance = cat.illnesses[illness]["infectiousness"]
-        chance += len(meds) * 7
+        chance += len(meds) * get_config("condition_related.med_infection_reduction")
         if not int(random.random() * chance):  # 1/chance to infect
             # fleas are the only condition allowed to spread outside of cold seasons
             if (
-                game.clan.current_season not in ["Leaf-bare", "Leaf-fall"]
+                game.clan.current_season
+                not in get_config("condition_related.illness_outbreak_season")
                 and illness != "fleas"
             ):
                 continue
@@ -2877,22 +2930,23 @@ def handle_outbreaks(cat, clan):
 
             if illness == "kittencough":
                 # adjust alive cats list to only include kittens
-                alive_cats = list(
+                healthy_cats = list(
                     filter(
                         lambda kitty: (
                             kitty.status.rank.is_baby()
                             and kitty.status.group_ID == clan.group_ID
+                            and not kitty.is_ill()
                         ),
                         Cat.all_cats.values(),
                     )
                 )
-                alive_count = len(alive_cats)
+                healthy_count = len(healthy_cats)
 
-            max_infected = int(alive_count / 2)  # 1/2 of alive cats
+            max_infected = int(healthy_count / 2)  # 1/2 of alive cats
             # If there are less than two cat to infect,
             # you are allowed to infect all the cats
             if max_infected < 2:
-                max_infected = alive_count
+                max_infected = healthy_count
             # If, event with all the cats, there is less
             # than two cats to infect, cancel outbreak.
             if max_infected < 2:
@@ -2910,7 +2964,7 @@ def handle_outbreaks(cat, clan):
 
             infected_names = []
             involved_cats = []
-            infected_cats = random.sample(alive_cats, infected_count)
+            infected_cats = random.sample(healthy_cats, infected_count)
             for sick_meowmeow in infected_cats:
                 infected_names.append(str(sick_meowmeow.name))
                 involved_cats.append(sick_meowmeow.ID)
