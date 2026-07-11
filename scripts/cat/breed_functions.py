@@ -226,16 +226,15 @@ class Breed_generator:
 
         genes = ["2", "2", "1", "1", "1", "1", "1", "1", "0", "0"]
 
-        genoclass.rufousing = ''
         genoclass.unders_ruf = ''
         genoclass.tickgenes = ''
         genoclass.bengal = ''
         genoclass.sokoke = ''
         
         genoclass.wideband = randint(4, 11)
+        genoclass.rufousing = 8
 
         for i in range(0, 4):
-            genoclass.rufousing += '2'
             genoclass.unders_ruf += '2'
             genoclass.tickgenes += '2'
 
@@ -2480,7 +2479,6 @@ class Breed_generator:
 
         genes = ["2", "2", "1", "1", "1", "1", "1", "1", "0", "0"]
 
-        genoclass.rufousing = ''
         genoclass.spotted = ''
         genoclass.tickgenes = ''
         genoclass.bengal = ''
@@ -2489,8 +2487,7 @@ class Breed_generator:
         while genoclass.wideband > 11 or genoclass.wideband < 4:
             genoclass.wideband = choice(genoclass.odds["wideband_kittypet"])
 
-        for i in range(0, 4):
-            genoclass.rufousing += '2'
+        genoclass.rufousing = 8
 
         genesspot = ["1", "1", "1", "1", "1", "0", "0", "0", "0", "0", "0", "0", "0"]
 
@@ -2956,7 +2953,7 @@ class Breed_checker:
             return False
         if phenotype.eumelanin[0] != "B" and phenotype.silver[0] != "I":
             return False
-        if phenotype.wbsum > 11 or phenotype.soksum > 3:
+        if phenotype.wideband > 11 or phenotype.soksum > 3:
             return False
         return True
     @staticmethod
@@ -2980,7 +2977,7 @@ class Breed_checker:
             return False
         if phenotype.dilute[0] == "d" or phenotype.pointgene[0] != "C" or phenotype.eumelanin[0] != "B" or phenotype.mack[0] == "mc":
             return False
-        if phenotype.wbsum > 11 or phenotype.soksum > 3 or phenotype.spotsum < 6:
+        if phenotype.wideband > 11 or phenotype.soksum > 3 or phenotype.spotsum < 6:
             return False
         return True
 
@@ -3143,7 +3140,7 @@ class Breed_checker:
             return False
         if phenotype.white[0] in ["wg", "wt", "wsal"]:
             return False
-        if phenotype.agouti[0] == "A" and (phenotype.ticked[0] != "ta" or phenotype.mack[0] == "mc" or phenotype.wbsum > 11 or\
+        if phenotype.agouti[0] == "A" and (phenotype.ticked[0] != "ta" or phenotype.mack[0] == "mc" or phenotype.wideband > 11 or\
                                             phenotype.ticksum > 3 or phenotype.bengsum > 3 or phenotype.soksum > 3):
             return False
         if 'o' not in phenotype.sexgene and phenotype.dilute[0] == "d":
@@ -3172,7 +3169,7 @@ class Breed_checker:
         if phenotype.white[0] != "w" or phenotype.pointgene[0] not in ["C", "cb"] or (('cm' in phenotype.pointgene or 'c' in phenotype.pointgene) and phenotype.pointgene[0] != "C"):
             return False
     
-        if phenotype.agouti[0] != "a" and phenotype.wbsum > 11:
+        if phenotype.agouti[0] != "a" and phenotype.wideband > 11:
             return "Burmilla"
         if phenotype.agouti[0] == "a" and phenotype.pointgene[0] == "cb":
             return "European Burmese"
@@ -3318,7 +3315,7 @@ class Breed_checker:
             return False
         if phenotype.dilutemd[0] != "dm" or phenotype.pinkdilute[0] == "dp":
             return False
-        if phenotype.agouti[0] != "A" or (phenotype.wbsum > 11 or phenotype.bengsum > 3 or phenotype.soksum > 3):
+        if phenotype.agouti[0] != "A" or (phenotype.wideband > 11 or phenotype.bengsum > 3 or phenotype.soksum > 3):
             return False
 
         if phenotype.eumelanin[0] != "B" or phenotype.white[0] != 'w':
@@ -3374,7 +3371,7 @@ class Breed_checker:
 
         if phenotype.eumelanin[0] != "B" or 'O' in phenotype.sexgene or phenotype.dilute[0] != 'D' or phenotype.white[0] != 'w':
             return False
-        if phenotype.silver[0] == 'I' or phenotype.pointgene[0] != "C" or phenotype.ticked[0] != "Ta" or phenotype.wbsum > 11:
+        if phenotype.silver[0] == 'I' or phenotype.pointgene[0] != "C" or phenotype.ticked[0] != "Ta" or phenotype.wideband > 11:
             return False
         
         return "Chausie"
@@ -3468,7 +3465,7 @@ class Breed_checker:
         if (('cm' in phenotype.pointgene or 'c' in phenotype.pointgene or 'cb' in phenotype.pointgene) and phenotype.pointgene[0] != "C"):
             return False
 
-        if phenotype.agouti[0] == "A" and (phenotype.bengsum > 3 or phenotype.soksum > 3 or phenotype.wbsum > 11):
+        if phenotype.agouti[0] == "A" and (phenotype.bengsum > 3 or phenotype.soksum > 3 or phenotype.wideband > 11):
             return False
         if phenotype.agouti[0] == "Apb":
             return False
@@ -3615,7 +3612,7 @@ class Breed_checker:
             return False
         if phenotype.dilutemd[0] != "dm" or phenotype.pinkdilute[0] == "dp":
             return False
-        if phenotype.agouti[0] != "A" or (phenotype.wbsum > 11 or phenotype.bengsum > 3 or phenotype.soksum > 3):
+        if phenotype.agouti[0] != "A" or (phenotype.wideband > 11 or phenotype.bengsum > 3 or phenotype.soksum > 3):
             return False
 
         if 'O' in phenotype.sexgene or phenotype.dilute[0] == 'd' or phenotype.white[0] != 'w':
@@ -4064,7 +4061,7 @@ class Breed_checker:
 
         if phenotype.eumelanin[0] != "B" or 'O' in phenotype.sexgene or phenotype.dilute[0] != 'D' or phenotype.white[0] != 'w':
             return False
-        if phenotype.silver[0] == 'I' or phenotype.pointgene[0] != "C" or phenotype.ticked[0] == "Ta" or phenotype.wbsum > 11:
+        if phenotype.silver[0] == 'I' or phenotype.pointgene[0] != "C" or phenotype.ticked[0] == "Ta" or phenotype.wideband > 11:
             return False
         
         if phenotype.mack[0] == "mc" or phenotype.spotsum < 6:
@@ -4223,7 +4220,7 @@ class Breed_checker:
 
         if phenotype.eumelanin[0] != "B" or 'O' in phenotype.sexgene or phenotype.dilute[0] != 'D' or phenotype.white[0] != 'w':
             return False
-        if phenotype.silver[0] == 'I' or phenotype.pointgene != ["cb", "cb"] or phenotype.ticked[0] != "Ta" or phenotype.wbsum > 11:
+        if phenotype.silver[0] == 'I' or phenotype.pointgene != ["cb", "cb"] or phenotype.ticked[0] != "Ta" or phenotype.wideband > 11:
             return False
         
         return "Singapura"
@@ -4270,7 +4267,7 @@ class Breed_checker:
 
         if phenotype.eumelanin[0] != "B" or 'O' in phenotype.sexgene or phenotype.dilute[0] != 'D' or phenotype.white[0] != 'w':
             return False
-        if phenotype.silver[0] == 'I' or phenotype.pointgene[0] not in ["C", "cs"] or phenotype.ticked[0] == "Ta" or phenotype.wbsum > 11:
+        if phenotype.silver[0] == 'I' or phenotype.pointgene[0] not in ["C", "cs"] or phenotype.ticked[0] == "Ta" or phenotype.wideband > 11:
             return False
         if phenotype.soksum < 6 or phenotype.mack[0] != "mc" or phenotype.bengsum > 3:
             return False
@@ -4359,7 +4356,7 @@ class Breed_checker:
         if phenotype.pinkdilute[0] == "dp":
             return False
 
-        if phenotype.agouti[0] == "A" and (phenotype.bengsum > 3 or phenotype.soksum > 3 or phenotype.wbsum > 11):
+        if phenotype.agouti[0] == "A" and (phenotype.bengsum > 3 or phenotype.soksum > 3 or phenotype.wideband > 11):
             return False
         if phenotype.agouti[0] == "Apb":
             return False
@@ -4410,7 +4407,7 @@ class Breed_checker:
 
         if phenotype.eumelanin[0] != "B" or 'O' in phenotype.sexgene or phenotype.dilute[0] != 'D' or phenotype.white[0] != 'w':
             return False
-        if phenotype.silver[0] == 'I' or phenotype.pointgene[0] != "C" or phenotype.ticked[0] == "Ta" or phenotype.wbsum > 11:
+        if phenotype.silver[0] == 'I' or phenotype.pointgene[0] != "C" or phenotype.ticked[0] == "Ta" or phenotype.wideband > 11:
             return False
         if phenotype.bengsum < 6 or phenotype.mack[0] != "Mc" or phenotype.soksum > 3:
             return False
